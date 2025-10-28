@@ -1,0 +1,73 @@
+food,region,calories_per_100g,protein_g_per_100g,approx_price_per_100g_INR,group
+Wheat (Atta),North,361,12.6,4.5,carb
+Chana Dal,North,378,20.5,10,dal
+Rajma (Kidney Beans),North,337,23.6,12,dal
+Paneer,North,318,21.2,25,meat
+Curd (Dahi),North,61,3.5,6,meat
+Palak (Spinach),North,23,2.9,5,veg
+Aloo (Potato),North,77,2.0,4,carb
+Ghee,North,900,0,70,fat
+Mustard Oil,North,884,0,15,fat
+Moong Dal,North,347,24.0,9,dal
+Bajra (Pearl Millet),North,378,11.0,6,carb
+Makki (Corn),North,365,9.4,5,carb
+Chicken,North,120,22.5,17,meat
+Eggs,North,143,12.6,7,meat
+Apple,North,52,0.3,12,veg
+Cauliflower,North,25,1.9,5,veg
+Onion,North,40,1.1,4,garnish
+Garlic,North,149,6.4,10,garnish
+Rice,South,365,7.1,5,carb
+Ragi (Finger Millet),South,328,7.3,7,carb
+Toor Dal,South,343,22.0,12,dal
+Coconut,South,354,3.3,10,veg
+Idli/Dosa Batter,South,130,3.0,6,carb
+Sambar (Lentil dish),South,120,5.0,7,dal
+Curd,South,61,3.5,6,meat
+Tamarind,South,239,2.8,9,veg
+Drumstick (Moringa),South,37,2.1,7,veg
+Curry Leaves,South,108,6.1,5,garnish
+Fish (Mackerel),South,205,18.6,20,meat
+Eggs,South,143,12.6,7,meat
+Banana,South,89,1.1,4,veg
+Coconut Oil,South,862,0,10,fat
+Rice,East,365,7.1,5,carb
+Fish (Rohu),East,97,19.0,12,meat
+Mustard Oil,East,884,0,15,fat
+Masoor Dal,East,352,25.1,8,dal
+Chhena (Fresh Cheese),East,290,18.0,15,meat
+Puffed Rice (Muri),East,402,6.3,3,carb
+Banana,East,89,1.1,4,veg
+Papaya,East,43,0.5,5,veg
+Pumpkin,East,26,1.0,5,veg
+Potato,East,77,2.0,4,carb
+Cabbage,East,25,1.3,4,veg
+Hilsa Fish,East,260,21.8,100,meat
+Eggs,East,143,12.6,7,meat
+Sweet Potato,East,86,1.6,5,carb
+Spinach (Saag),East,23,2.9,5,veg
+Rice Bran Oil,East,884,0,11,fat
+Paneer,East,318,21.2,25,meat
+Green Gram,East,347,24.0,9,dal
+Flattened Rice (Poha),East,364,7.0,5,carb
+Jaggery (Gur),East,383,0.4,6,carb
+Jowar (Sorghum),West,339,11.3,6,carb
+Bajra (Pearl Millet),West,378,11.0,6,carb
+Rice,West,365,7.1,5,carb
+Moong Dal,West,347,24.0,9,dal
+Groundnut (Peanut),West,567,25.8,8,fat
+Coconut,West,354,3.3,10,veg
+Fish (Pomfret),West,93,18.3,25,meat
+Curd (Dahi),West,61,3.5,6,meat
+Mango,West,60,0.8,8,veg
+Drumstick Leaves,West,64,9.4,5,veg
+Brinjal,West,25,1.0,5,veg
+Tomato,West,18,0.9,5,garnish
+Okra (Bhindi),West,33,1.9,6,veg
+Wheat (Chapati),West,361,12.6,4.5,carb
+Besan (Gram Flour),West,387,22.4,7,dal
+Eggs,West,143,12.6,7,meat
+Chicken,West,120,22.5,17,meat
+Onion,West,40,1.1,4,garnish
+Groundnut Oil,West,884,0,10,fat
+Cucumber,West,16,0.7,4,veg
