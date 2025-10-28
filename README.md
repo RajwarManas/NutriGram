@@ -1,2 +1,5 @@
-# AI-meal-recommender
-Ai chatbot to recommend nutritious budget friendly meal plans
+# AI Meal Recommender 🍽️
+
+**Live WhatsApp Bot**: Send a message to **+14155238886**
+
+**Try it**:
