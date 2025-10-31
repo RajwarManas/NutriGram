@@ -13,6 +13,7 @@ translator = Translator()
 nlp = en_core_web_sm.load()
 supported_languages = {"en": "English", "hi": "Hindi", "ta": "Tamil", "bn": "Bengali"}
 
+# Output format
 def format_meal_plan(total_calories, total_protein, total_cost, foods, lang):
     output = "🍽️ Optimized Meal Plan:\n"
     for food, grams, cal, prot, cost in foods:
@@ -31,7 +32,7 @@ def solve_meal_plan(user_region, calorie_goal, protein_goal, budget_pref, region
         prob += lpSum([food_vars[row['food']] for idx, row in regional_foods.iterrows()])
     else:
         prob += lpSum([food_vars[row['food']] * row["approx_price_per_100g_INR"] for idx, row in regional_foods.iterrows()])
-    # Constraints from non-WhatsApp code
+    # Constraints for creating a balanced meal
     prob += lpSum([(row["calories_per_100g"]/100) * food_vars[row['food']] for idx, row in regional_foods.iterrows()]) >= calorie_goal * 0.90
     prob += lpSum([(row["calories_per_100g"]/100) * food_vars[row['food']] for idx, row in regional_foods.iterrows()]) <= calorie_goal * 1.10
     prob += lpSum([(row["protein_g_per_100g"]/100) * food_vars[row['food']] for idx, row in regional_foods.iterrows()]) >= protein_goal * 0.90
@@ -72,10 +73,10 @@ def whatsapp_reply():
             user_lang = "en"
             resp.message(translator.translate("Language not supported. Using English.", dest=user_lang).text)
             return str(resp)
-        # Translate to English
+        # Translating user input into English
         user_input_en = user_input if user_lang == "en" else translator.translate(user_input, dest="en").text
         print(f"Input: {user_input}, Translated: {user_input_en}")
-        # Fix common translation issues
+        # Common translation issues fix
         user_input_en = (user_input_en.replace("Answer", "North")
                         .replace("northward", "North")
                         .replace("calorie", "kcal")
@@ -85,7 +86,7 @@ def whatsapp_reply():
         if "120" in user_input_en and "120g" not in user_input_en:
             user_input_en = user_input_en.replace("120", "120g")
         print(f"Fixed translation: {user_input_en}")
-        # Parse region
+        # Parse user region
         regions = ["North", "South", "East", "West"]
         doc = nlp(user_input_en)
         user_region = next((token.text.title() for token in doc if token.text.title() in regions), None)
@@ -93,7 +94,7 @@ def whatsapp_reply():
             print("No region detected")
             resp.message(translator.translate("Couldn't detect region. Reply with region (North/South/East/West).", dest=user_lang).text)
             return str(resp)
-        # Parse calories and protein (use non-WhatsApp regex)
+        # Parse calories and protein goals 
         calorie_match = re.search(r'(?:(\d+)\s*(?:kcal|cal|cals|calories?))|(?:(?:kcal|cal|cals|calories?)\s*(\d+))', user_input_en, re.IGNORECASE)
         protein_match = re.search(r'(?:(\d+)\s*g\s*(?:protein|pro)?)|(?:(?:protein|pro)\s*(\d+))', user_input_en, re.IGNORECASE)
         calorie_goal = int(calorie_match.group(1) or calorie_match.group(2)) if calorie_match else 2000
@@ -101,7 +102,7 @@ def whatsapp_reply():
         budget_keywords = ["cheap", "affordable", "budget", "low cost", "expensive", "premium"]
         budget_pref = next((kw for kw in budget_keywords if kw in user_input_en.lower()), "affordable")
         print(f"Parsed: Region={user_region}, Calories={calorie_goal}, Protein={protein_goal}, Budget={budget_pref}")
-        # Load CSV
+        # Loading CSV
         df = pd.read_csv("fssai_food_data.csv")
         regional_foods = df[df["region"] == user_region].copy()
         print(f"Regional foods for {user_region}: {len(regional_foods)} foods found")
@@ -110,13 +111,13 @@ def whatsapp_reply():
             resp.message(translator.translate("No foods found for your region. Try a different region.", dest=user_lang).text)
             return str(resp)
         regional_foods["approx_price_per_100g_INR"] = regional_foods["approx_price_per_100g_INR"].replace(0, 0.01)
-        # Optimize
+        # Optimizing meal plan
         prob, food_vars = solve_meal_plan(user_region, calorie_goal, protein_goal, budget_pref, regional_foods, user_lang)
         if prob.status != 1:
             print(f"Infeasible. Foods: {regional_foods['food'].tolist()}")
             resp.message(translator.translate("No meal plan possible with current foods. Try a different region or adjust goals.", dest=user_lang).text)
             return str(resp)
-        # Build meal plan
+        # Building meal plan
         total_calories = 0
         total_protein = 0
         total_cost = 0
